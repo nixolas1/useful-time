@@ -78,3 +78,16 @@ export const CATEGORY_COLORS = {
   adHoc: '#a4c8f4',
   project: '#b8e6c8',
 }
+
+export interface WeekStats {
+  totalProjectTime: number
+  meetingTime: number
+  overheadTime: number
+  adHocTime: number
+}
+
+export interface FocusProjectInfo {
+  project: Project
+  assignedDays: string[]
+  totalHours: number
+}

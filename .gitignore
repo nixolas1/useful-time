@@ -28,6 +28,9 @@ dist-ssr
 /playwright-report/
 /blob-report/
 
+# Data
+data/useful-time.json
+
 # Claude
 .claude/
 .superpowers/
