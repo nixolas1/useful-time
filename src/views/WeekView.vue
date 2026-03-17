@@ -348,9 +348,6 @@ function handleShare() {
   display: flex;
   flex-direction: column;
   gap: var(--space-2xl);
-  background: var(--color-bg);
-  padding: var(--space-lg);
-  border-radius: var(--radius-lg);
 }
 
 .chart-section {

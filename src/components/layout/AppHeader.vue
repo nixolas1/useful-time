@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRouter } from "vue-router";
+import AppLogo from "./AppLogo.vue";
 import ViewToggle from "./ViewToggle.vue";
 
 const props = defineProps<{
@@ -55,7 +56,8 @@ function goToSettings() {
 <template>
   <header class="app-header">
     <div class="header-left">
-      <h1 class="app-name">useful time</h1>
+      <AppLogo />
+      <h1 class="app-name">Useful Time</h1>
       <ViewToggle :modelValue="currentView" @update:modelValue="onViewChange" />
     </div>
 
@@ -83,8 +85,8 @@ function goToSettings() {
       </button>
       <button class="icon-btn" @click="goToSettings" title="Settings">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M8 1.5V3M8 13V14.5M1.5 8H3M13 8H14.5M3.05 3.05L4.1 4.1M11.9 11.9L12.95 12.95M12.95 3.05L11.9 4.1M4.1 11.9L3.05 12.95" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M6.6 1.5H9.4L9.8 3.3C10.2 3.5 10.6 3.7 10.9 4L12.7 3.4L14.1 5.8L12.7 7.1C12.7 7.4 12.7 7.7 12.7 8C12.7 8.3 12.7 8.6 12.7 8.9L14.1 10.2L12.7 12.6L10.9 12C10.6 12.3 10.2 12.5 9.8 12.7L9.4 14.5H6.6L6.2 12.7C5.8 12.5 5.4 12.3 5.1 12L3.3 12.6L1.9 10.2L3.3 8.9C3.3 8.6 3.3 8.3 3.3 8C3.3 7.7 3.3 7.4 3.3 7.1L1.9 5.8L3.3 3.4L5.1 4C5.4 3.7 5.8 3.5 6.2 3.3L6.6 1.5Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          <circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.2"/>
         </svg>
       </button>
     </div>
