@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import type { WeekStats, FocusProjectInfo } from '../../types'
 
-defineProps<{
+const props = defineProps<{
   focusProjects: FocusProjectInfo[]
   weekStats: WeekStats
   overcommitLevel: 'healthy' | 'warning' | 'blocking'
@@ -10,8 +10,17 @@ defineProps<{
 
 const collapsed = ref(false)
 
+const totalHours = computed(() =>
+  props.weekStats.totalProjectTime + props.weekStats.meetingTime + props.weekStats.overheadTime + props.weekStats.adHocTime
+)
+
 function formatHours(h: number): string {
   return h % 1 === 0 ? `${h}h` : `${h.toFixed(1)}h`
+}
+
+function formatPct(h: number): string {
+  if (totalHours.value === 0) return '0%'
+  return `${Math.round((h / totalHours.value) * 100)}%`
 }
 </script>
 
@@ -69,21 +78,25 @@ function formatHours(h: number): string {
           <div class="stat-item">
             <span class="stat-dot" style="background: var(--color-project)"></span>
             <span class="stat-label">Project Time</span>
+            <span class="stat-pct">{{ formatPct(weekStats.totalProjectTime) }}</span>
             <span class="stat-value">{{ formatHours(weekStats.totalProjectTime) }}</span>
           </div>
           <div class="stat-item">
             <span class="stat-dot" style="background: var(--color-meetings)"></span>
             <span class="stat-label">Meetings</span>
+            <span class="stat-pct">{{ formatPct(weekStats.meetingTime) }}</span>
             <span class="stat-value">{{ formatHours(weekStats.meetingTime) }}</span>
           </div>
           <div class="stat-item">
             <span class="stat-dot" style="background: var(--color-overhead)"></span>
             <span class="stat-label">Overhead</span>
+            <span class="stat-pct">{{ formatPct(weekStats.overheadTime) }}</span>
             <span class="stat-value">{{ formatHours(weekStats.overheadTime) }}</span>
           </div>
           <div class="stat-item">
             <span class="stat-dot" style="background: var(--color-adhoc)"></span>
             <span class="stat-label">Ad-hoc</span>
+            <span class="stat-pct">{{ formatPct(weekStats.adHocTime) }}</span>
             <span class="stat-value">{{ formatHours(weekStats.adHocTime) }}</span>
           </div>
         </div>
@@ -251,6 +264,14 @@ function formatHours(h: number): string {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   flex: 1;
+}
+
+.stat-pct {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+  min-width: 28px;
+  text-align: right;
 }
 
 .stat-value {
